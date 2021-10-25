@@ -7,7 +7,7 @@ const _ = require("lodash");
 const path = require("path");
 
 const app = express();
-app.use(express.static("../teaser_client/build"));
+app.use(express.static("../jti_horeca_client/build"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: "5000mb" }));
 app.use(bodyParser.json({ limit: "5000mb" }));
@@ -15,9 +15,9 @@ const port = 5052;
 
 const MongoClient = require("mongodb").MongoClient;
 // const MongoClient = require("mongodb").MongoClient;
-// const uri = "mongodb://127.0.0.1:27017/jti_horeca";
-const uri =
-  "mongodb+srv://aktcl:01939773554op5t@cluster0.9akoo.mongodb.net/jti_horeca?retryWrites=true&w=majority";
+const uri = "mongodb://127.0.0.1:27017/jti_horeca";
+// const uri =
+//   "mongodb+srv://aktcl:01939773554op5t@cluster0.9akoo.mongodb.net/jti_horeca?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -92,6 +92,7 @@ client.connect((err) => {
             answer16: answers.ans16,
             answer17: answers.ans17,
             answer18: answers.ans18,
+            remarksQ10: answers.remarksQ10,
             agentID: answers.agentID,
             callDate: answers.callDate,
             callTime: answers.callTime,
@@ -1644,9 +1645,11 @@ client.connect((err) => {
         res.send(results);
       });
   });
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "../teaser_client/build", "index.html"));
-  // });
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "../jti_horeca_client/build", "index.html")
+    );
+  });
 });
 
 app.get("/", (req, res) => {
