@@ -257,7 +257,9 @@ client.connect((err) => {
             // consumers: users[user],
             // countByUser: users[user].length,
             sachet_sales: users[user]
-              .filter((x) => x.sales_status === "5_Sticks_Navy_Option_Trial")
+              .filter(
+                (x) => x.sales_status === "3_Sticks_or_More_Navy_Option_Trial"
+              )
               .slice(0, 3)
               .map((d) => {
                 let datas = {};
@@ -271,18 +273,19 @@ client.connect((err) => {
             oneStick_sales: users[user]
               .filter(
                 (x) =>
-                  x.sales_status === "3_Sticks_or_More_Navy_Option_Trial" ||
                   x.sales_status === "1_Stick_Navy_Option_Trial" ||
                   x.sales_status === "2_Sticks_Navy_Option_Trial"
               )
               .slice(
                 0,
                 users[user].filter(
-                  (x) => x.sales_status === "5_Sticks_Navy_Option_Trial"
+                  (x) => x.sales_status === "3_Sticks_or_More_Navy_Option_Trial"
                 ).length < 3
                   ? 3 -
                       users[user].filter(
-                        (x) => x.sales_status === "5_Sticks_Navy_Option_Trial"
+                        (x) =>
+                          x.sales_status ===
+                          "3_Sticks_or_More_Navy_Option_Trial"
                       ).length
                   : 0
               )
@@ -369,8 +372,7 @@ client.connect((err) => {
               .filter(
                 (x) =>
                   x.for_d === null &&
-                  (x.sales_status === "3_Sticks_or_More_Navy_Option_Trial" ||
-                    x.sales_status === "1_Stick_Navy_Option_Trial" ||
+                  (x.sales_status === "1_Stick_Navy_Option_Trial" ||
                     x.sales_status === "2_Sticks_Navy_Option_Trial")
               )
               .slice(
